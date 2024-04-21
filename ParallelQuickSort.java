@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class ParallelQuickSort {
-    private static final int NUM_THREADS = 1; // Number of threads to use
-    private static final int NUM_OF_RAN_INT = 100; // Number of random integers to sort
+    private static final int NUM_THREADS = 18; // Number of threads to use
+    private static final int NUM_OF_RAN_INT = 100000; // Number of random integers to sort
     private static int[] globalArray; // Global array to be sorted
 
     // Method to generate an array of random integers
