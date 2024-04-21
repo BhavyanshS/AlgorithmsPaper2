@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class MSQSA {
     private static final int NUM_THREADS = 4;
-    private static final int NUM_OF_RAN_INT = 100000;
+    private static final int NUM_OF_RAN_INT = 1000;
     private static int[] globalArray;
 
 
@@ -102,7 +102,7 @@ public class MSQSA {
 
     public static void main(String[] args) {
         MSQSA msqsa = new MSQSA();
-        int runs = 100;
+        int runs = 10;
         long totalDuration = 0;
 
         for (int i = 0; i < runs; i++) {
