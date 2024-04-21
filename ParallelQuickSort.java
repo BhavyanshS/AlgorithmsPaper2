@@ -16,7 +16,7 @@ public class ParallelQuickSort {
         return array;
     }
 
-    public void pqsa(int[] array, int start, int end) {
+    public void pqsa(int[] array, int start, int end, int maxThreads) {
         //Check if array has more than 1 element
         if (start < end) {
             //First we split the array
@@ -27,14 +27,14 @@ public class ParallelQuickSort {
                     //This thread runs the first half
                     @Override
                     public void run() {
-                        pqsa(array, start, pivotIndex - 1);
+                        pqsa(array, start, pivotIndex - 1, NUM_THREADS);
                     }
                 });
                 Thread rightThread = new Thread(new Runnable() {
                     //This thread runs the second half
                     @Override
                     public void run() {
-                        pqsa(array, pivotIndex + 1, end);
+                        pqsa(array, pivotIndex + 1, end, NUM_THREADS);
                     }
                 });
 
@@ -51,8 +51,8 @@ public class ParallelQuickSort {
             } else {
                 //When you reach the max number of threads
                 //Just quick sort the array
-                pqsa(array, start, pivotIndex - 1);
-                pqsa(array, pivotIndex + 1, end);
+                pqsa(array, start, pivotIndex - 1, NUM_THREADS);
+                pqsa(array, pivotIndex + 1, end, NUM_THREADS);
             }
         }
     }
@@ -83,13 +83,13 @@ public class ParallelQuickSort {
 
     public static void main(String[] args) {
         ParallelQuickSort pqsa = new ParallelQuickSort();
-        int runs = 10; // Number of runs for averaging sorting time
+        int runs = 10;
         long totalDuration = 0;
 
         for (int i = 0; i < runs; i++) {
-            globalArray = generateRandomArray(NUM_OF_RAN_INT); // Generate random array
+            globalArray = generateRandomArray(NUM_OF_RAN_INT);
             long startTime = System.currentTimeMillis();
-            pqsa.pqsa(globalArray, 0, NUM_OF_RAN_INT - 1); // Perform parallel quick sort
+            pqsa.pqsa(globalArray, 0, NUM_OF_RAN_INT - 1, NUM_THREADS);
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
             totalDuration += duration;
